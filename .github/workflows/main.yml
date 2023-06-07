@@ -44,7 +44,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          platforms: linux/386, linux/arm64
+          platforms: linux/arm64 #,linux/386 #nie ma node/alpine na i386
           context: .
           file: ./Dockerfile
           push: true
