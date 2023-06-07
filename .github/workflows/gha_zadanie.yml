@@ -1,4 +1,4 @@
-name: gha_zad:GitHub Action Zadanie 1
+name: zad2:GitHub_Zadanie 2
 
 on:
   workflow_dispatch:
@@ -30,7 +30,7 @@ jobs:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-buildx-
+            ${{ runner.os }}-buildx
 
       # Logowanie do Dockerhub-a
       - name: Login to DockerHub
@@ -44,15 +44,14 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          platforms: linux/arm64/v8,linux/amd64
+          platforms: linux/x86_64, linux/arm64
           context: .
-          file: ./Dockerfile_prod
+          file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/gha_lab10:zadv1
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
-
+            ${{ secrets.DOCKERHUB_USERNAME }}/zadanie2:zadanie
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zadanie2:zadanie
+          cache-to: type=inline
         #  tags: |
         #    ${{ secrets.DOCKERHUB_USERNAME }}/gha_lab10:zadv1
         #  cache-from: type=registry,ref=gha_lab10:zadv1
