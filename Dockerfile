@@ -2,7 +2,7 @@ FROM node:alpine
 ENV NODE_OPTIONS=--openssl-legacy-provider
 WORKDIR '/app'
 COPY package.json .
-RUN npm install && npm cache clean --force
+RUN npm install 
 COPY . .
 RUN npm run build
 
