@@ -50,15 +50,26 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           registry: ghcr.io
-          username: "voiteckheir"
-          password: ${{ secrets.GITHUB_TOKEN }}
-          repository: VoiteckHeira/zadanie2
+          username: "VoiteckHeira"
+          password: ${{ secrets.GHCR_TOKEN }}
+          repository: voiteckheir/zadanie2
           tags: latest
-          cache-from: type=registry,ref=ghcr.io/VoiteckHeira/zadanie2:latest
-          cache-to: type=inline
+          #cache-from: type=registry,ref=ghcr.io/VoiteckHeira/zadanie2:latest
+          #cache-to: type=inline
           #cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zadanie2:zadanie
           #cache-to: type=inline
-
+      # - name: Build and push
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     repository: ghcr.io/VoiteckHeira/zadanie2
+      #     platforms: linux/arm64v8 ,linux/i386 # nie ma node:alpine na i386
+      #     context: .
+      #     file: ./Dockerfile
+      #     push: true
+      #     tags: |
+      #       ${{ secrets.DOCKERHUB_USERNAME }}/zadanie2:zadanie
+      #     cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zadanie2:zadanie
+      #     cache-to: type=inline
       # - name: Log in to the Container registry
       #   uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       #   with:
