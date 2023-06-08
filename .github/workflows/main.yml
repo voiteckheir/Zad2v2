@@ -63,8 +63,11 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/zadanie2:x86_64
-            ghcr.io/${{ github.repository_owner }}/zadanie2:arm64
+            ghcr.io/${{ github.repository_owner }}/zadanie2:zad
+          # ghcr.io/${{ github.repository_owner }}/zadanie2:x86_64
+          # ghcr.io/${{ github.repository_owner }}/zadanie2:arm64
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/zadanie2:zad
+          cache-to: type=inline
           #cache-from: type=registry,ref=ghcr.io/VoiteckHeira/zadanie2:latest
           #cache-to: type=inline
           #cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zadanie2:zadanie
