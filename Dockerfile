@@ -3,7 +3,7 @@ RUN apk update && apk upgrade && rm -rf /var/cache/apk/* && apk add --no-cache n
 ENV NODE_OPTIONS=--openssl-legacy-provider
 WORKDIR '/app'
 COPY package.json .
-RUN npm install && npm audit fix --force
+RUN npm install 
 COPY . .
 RUN npm run build
 
