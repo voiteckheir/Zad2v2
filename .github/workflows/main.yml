@@ -54,6 +54,7 @@ jobs:
           password: ${{ secrets.GHCR_TOKEN }}
           repository: voiteckheir/zadanie2
           tags: latest
+
           #cache-from: type=registry,ref=ghcr.io/VoiteckHeira/zadanie2:latest
           #cache-to: type=inline
           #cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zadanie2:zadanie
