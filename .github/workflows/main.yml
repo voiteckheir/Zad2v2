@@ -50,10 +50,12 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           registry: ghcr.io
-          username: "VoiteckHeira"
+          username: "voiteckheir"
           password: ${{ secrets.GITHUB_TOKEN }}
           repository: VoiteckHeira/zadanie2
           tags: latest
+          cache-from: type=registry,ref=ghcr.io/VoiteckHeira/zadanie2:latest
+          cache-to: type=inline
           #cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zadanie2:zadanie
           #cache-to: type=inline
 
@@ -71,26 +73,26 @@ jobs:
       #     tags: ghcr.io/VoiteckHeira/Zadanie2:latest
       # Budowa obrazu dla dwóch architektur sprzętowych
       # oraz przesłanie do własnego repo na Dockerhub
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          platforms: linux/arm64v8 ,linux/i386 # nie ma node:alpine na i386
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/zadanie2:zadanie
-          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zadanie2:zadanie
-          cache-to: type=inline
-        #  tags: |
-        #    ${{ secrets.DOCKERHUB_USERNAME }}/gha_lab10:zadv1
-        #  cache-from: type=registry,ref=gha_lab10:zadv1
-        #  cache-to: type=registry,ref=gha_lab10:zadv1,mode=max
-        #  tags: |
-        #    ${{ secrets.DOCKERHUB_USERNAME }}/gha_lab10:zadv1
-        #  cache-from: type=gha
-        #  cache-to: type=gha,mode=max
+      # - name: Build and push
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     platforms: linux/arm64v8 ,linux/i386 # nie ma node:alpine na i386
+      #     context: .
+      #     file: ./Dockerfile
+      #     push: true
+      #     tags: |
+      #       ${{ secrets.DOCKERHUB_USERNAME }}/zadanie2:zadanie
+      #     cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zadanie2:zadanie
+      #     cache-to: type=inline
+      #  tags: |
+      #    ${{ secrets.DOCKERHUB_USERNAME }}/gha_lab10:zadv1
+      #  cache-from: type=registry,ref=gha_lab10:zadv1
+      #  cache-to: type=registry,ref=gha_lab10:zadv1,mode=max
+      #  tags: |
+      #    ${{ secrets.DOCKERHUB_USERNAME }}/gha_lab10:zadv1
+      #  cache-from: type=gha
+      #  cache-to: type=gha,mode=max
 
-        # Temp fix
-        # https://github.com/docker/build-push-action/issues/252
-        # https://github.com/moby/buildkit/issues/1896
+      # Temp fix
+      # https://github.com/docker/build-push-action/issues/252
+      # https://github.com/moby/buildkit/issues/1896
