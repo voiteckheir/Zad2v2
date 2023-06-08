@@ -1,9 +1,9 @@
 FROM alpine:3.18.0
-RUN apk add --no-cache nodejs npm
+RUN apk update && apk upgrade && rm -rf /var/cache/apk/* && apk add --no-cache nodejs npm
 ENV NODE_OPTIONS=--openssl-legacy-provider
 WORKDIR '/app'
 COPY package.json .
-RUN npm install 
+RUN npm install && npm audit fix --force && npm cache clean --force
 COPY . .
 RUN npm run build
 

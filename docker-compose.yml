@@ -4,6 +4,6 @@ services:
     stdin_open: true
     environment:
       - CHOKIDAR_USEPOLLING=true
-    image: voiteckheir/zadanie2:zadanie
+    image: ghcr.io/voiteckheir/zadanie2:zad
     ports:
       - "80:80"

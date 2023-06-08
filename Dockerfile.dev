@@ -1,9 +1,11 @@
-FROM node:alpine
+FROM node:alpine3.18
 
 WORKDIR '/app'
 ENV NODE_OPTIONS=--openssl-legacy-provider
+RUN apk update  && apk upgrade openssl && rm -rf /var/cache/apk/*
 COPY package.json .
-RUN npm install
+
+RUN npm install && npm audit fix --force && npm cache clean --force
 
 COPY . .
 
