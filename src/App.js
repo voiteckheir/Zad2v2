@@ -9,13 +9,7 @@ function App() {
         <p>
           Wojciech Dziedzic TI 6.1
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
+
       </header>
     </div>
   );
