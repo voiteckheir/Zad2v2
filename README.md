@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# ZADANIE 2
+Zadanie 2 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## CZĘŚĆ OBOWIĄZKOWA
+<br/><hr/><br/>
+a. zmodyfikować kod źródłowy tak by aplikacja wyświetlała imię oraz nazwisko studenta
+(tekst pod symbolem „atomu”)
 
-## Available Scripts
+<br/><hr/><br/>
+b. opracować łańcuch działań w ramach Github Actions, który pozwoli na zbudowaniu
+obrazów Docker zgodnych z OCI dla dwóch architektur sprzętowych: x86_64 oraz arm64
+(procesor M1/M2).
 
-In the project directory, you can run:
+<br/><hr/><br/>
+c. obraz ma zostać poddany testowi pod kątem CVE z wykorzystaniem dowolnego (jednego
+z trzech) narzędzi przedstawionych na końcu instrukcji do laboratorium nr 12. Obraz nie
+może mieć żadnych zagrożeń krytycznych.
 
-### `npm start`
+<br/><hr/><br/>
+d. w trakcie budowania obrazów należy korzystać z cache w trybie inline
+e. po zbudowaniu, w ramach działań w Github Actions, obraz ma być przesłany do
+repozytorium na Github Packages (repo: ghcr.io).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<br/><hr/><br/>
+Łańcuch Github Actions ma zostać uruchomiony tak by potwierdzić poprawność opracowanego
+łańcucha działań.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br/><hr/><br/>
+## CZĘŚĆ DODATKOWA
 
-### `npm run build`
+<br/><hr/><br/>
+Uzupełnić workflow Github Actions o tagowanie obrazu zgodną ze schematem SemVer. 
+Należy:
+a. Krótko wyjaśnić wprowadzone modyfikacje,
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br/><hr/><br/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+b. Udowodnić, że kolejny proces uruchomienia łańcucha Github Action spowoduje
+poprawne wygenerowanie numeru kolejnej wersji obrazu
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<br/><hr/><br/>
+Opracowany łańcuch Github Actions z tagowaniem SemVer ma zostać uruchomiony tak by
+potwierdzić poprawność opracowanego łańcucha działań.
