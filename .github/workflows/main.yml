@@ -88,16 +88,32 @@ jobs:
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:x86_64 #,${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:arm64
           cache-to: type=inline
 
+  # security:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@master
+  #     - name: snyk node
+  #       uses: snyk/actions/node@master
+  #       id: snyk
+  #       continue-on-error: true
+  #       env:
+  #         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
   security:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: snyk node
-        uses: snyk/actions/node@master
-        id: snyk
-        continue-on-error: true
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/nodemaster
+        continue-on-error: true # To make sure that SARIF upload gets called
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --sarif-file-output=snyk.sarif
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
 
       # - name: Docker Scout
       #   id: docker-scout
