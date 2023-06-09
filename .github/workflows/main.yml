@@ -14,7 +14,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/zadanie2
   SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
-  PLATFOTM: linux/x86_64, linux/arm64/v8
+  PLATFOTM: linux/x86_64, linux/arm64
 
 jobs:
   build:
@@ -96,7 +96,7 @@ jobs:
         with:
           command: compare
           image: ${{ steps.meta.outputs.tags }}
-          to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:edge
+          to: ${{ env.REGISTRY }}/${{ github.repository_owner }}:edge
           ignore-unchanged: true
           only-severities: critical,high
           token: ${{ secrets.DOCKERHUB_TOKEN }}
