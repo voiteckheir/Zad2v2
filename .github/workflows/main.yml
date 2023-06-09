@@ -81,11 +81,11 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:x86_64
             ${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:arm64
-          # ${{ steps.meta.outputs.tags }}
+            ${{ steps.meta.outputs.tags }}
           # ghcr.io/${{ github.repository_owner }}/zadanie2:arm64
           #ghcr.io/${{ github.repository_owner }}/zadanie2:zad
-          #labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:x86_64, ${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:arm64
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2 # ${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:arm64
           cache-to: type=inline
 
       # - name: Docker Scout
