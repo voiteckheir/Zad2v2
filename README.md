@@ -1,10 +1,11 @@
 # ZADANIE 2
-Zadanie 2 
+Zadanie 2 z Technologi Chmurowych
 
 ## CZĘŚĆ OBOWIĄZKOWA
 <br/><hr/><br/>
 a. zmodyfikować kod źródłowy tak by aplikacja wyświetlała imię oraz nazwisko studenta
 (tekst pod symbolem „atomu”)
+
 
 <br/><hr/><br/>
 b. opracować łańcuch działań w ramach Github Actions, który pozwoli na zbudowaniu
