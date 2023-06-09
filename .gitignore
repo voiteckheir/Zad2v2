@@ -1,1 +1,5 @@
 node_modules
+docker_compose_dev2.yml
+docker_compose_rob2.yml
+Dockerfile copy
+Dockerfile.dev
