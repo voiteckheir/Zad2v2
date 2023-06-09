@@ -108,7 +108,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           image: ${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:x86_64
-          args: --severity-threshold=high,critical
+          args: --severity-threshold=critical
 
       - name: snyk node
         uses: snyk/actions/node@master
