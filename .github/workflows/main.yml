@@ -85,7 +85,7 @@ jobs:
           # ghcr.io/${{ github.repository_owner }}/zadanie2:arm64
           #ghcr.io/${{ github.repository_owner }}/zadanie2:zad
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:x86_64 #,${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:arm64
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:${{ steps.meta.outputs.tags }} #,${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:arm64
           cache-to: type=inline
 
   # security:
@@ -102,19 +102,20 @@ jobs:
   security:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
+    - name: Run Snyk to check Docker images for vulnerabilities
+      uses: snyk/actions/docker@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        image: ${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:x86_64
+        args: --severity-threshold=high,critical
+
+    - name: snyk node
         uses: snyk/actions/node@master
-        continue-on-error: true # To make sure that SARIF upload gets called
+        id: snyk
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --sarif-file-output=snyk.sarif --file=Dockerfile
-
-      - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: snyk.sarif
       # - name: Docker Scout
       #   id: docker-scout
       #   if: ${{ github.event_name == 'push' }}
