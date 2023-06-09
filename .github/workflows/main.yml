@@ -25,8 +25,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            zadanie2/app
-            ghcr.io/${{ github.repository_owner }}/zadanie2
+            ghcr.io/${{ github.repository_owner }}/zadanie2:x86_64
+            ghcr.io/${{ github.repository_owner }}/zadanie2:arm64
           tags: |
             type=ref,event=branch
             type=ref,event=pr
