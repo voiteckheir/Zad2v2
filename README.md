@@ -17,7 +17,13 @@ obrazów Docker zgodnych z OCI dla dwóch architektur sprzętowych: x86_64 oraz 
 
 
 ```
-
+      - name: Build and push ghcr
+        uses: docker/build-push-action@v2
+        id: build
+        with:
+          platforms: linux/x86_64,linux/arm64/v8
+          context: .
+          file: ./Dockerfile
 ```
 
 <br/><hr/><br/>
@@ -32,6 +38,19 @@ została ustawiona flaga która wyświetli tylko błędy krytyczne
 
 
 ```
+  security:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@master
+      - name: snyk node
+        uses: snyk/actions/node@master
+        id: snyk
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=critical
 
 ```
 <br/><hr/><br/>
@@ -43,10 +62,20 @@ Używanie repozytorium ghcr.io wymaga dodania tokenu github o co najmniej 3 wła
 - read:packages <br/>
 - write:packages <br/>
 - delete:packages <br/>
-
+```
+      - name: Login to GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_SV}}
+          #password: ${{ secrets.GH_TOKEN_NEXT }}
 
 ```
 
+```
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:${{ steps.meta.outputs.tags }} #,${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:arm64
+          cache-to: type=inline
 ```
 
 
