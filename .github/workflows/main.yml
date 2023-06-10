@@ -16,7 +16,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/zadanie2
   SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
-
+#
 jobs:
   build:
     # Definicja systemu do instalacji na weźle roboczym
