@@ -101,6 +101,7 @@ jobs:
 
   security:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Run Snyk to check Docker images for vulnerabilities
         uses: snyk/actions/docker@master
@@ -119,6 +120,7 @@ jobs:
 
   changelog:
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
       - name: Checkout
