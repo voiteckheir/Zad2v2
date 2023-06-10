@@ -52,13 +52,13 @@ jobs:
           password: ${{ secrets.GHCR_SV}}
           #password: ${{ secrets.GH_TOKEN_NEXT }}
 
-      - name: Build
-        uses: docker/bake-action@v2
-        with:
-          files: |
-            ./docker-bake.hcl
-            ${{ steps.meta.outputs.bake-file }}
-          targets: build
+      # - name: Build
+      #   uses: docker/bake-action@v2
+      #   with:
+      #     files: |
+      #       ./docker-bake.hcl
+      #       ${{ steps.meta.outputs.bake-file }}
+      #     targets: build
 
       - name: Buildx set-up
         uses: docker/setup-buildx-action@v2
@@ -155,7 +155,7 @@ jobs:
       - name: create release
         uses: actions/create-release@v1
         id: create_release
-        if: steps.changelog.outputs.skipped == 'false'
+        # if: steps.changelog.outputs.skipped == 'false'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
