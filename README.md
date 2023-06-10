@@ -3,20 +3,26 @@ Zadanie 2 z Technologi Chmurowych
 
 ## CZĘŚĆ OBOWIĄZKOWA
 <br/><hr/><br/>
-a. zmodyfikować kod źródłowy tak by aplikacja wyświetlała imię oraz nazwisko studenta
-(tekst pod symbolem „atomu”)
+a. zmodyfikować kod źródłowy tak by aplikacja wyświetlała imię oraz nazwisko studenta<br/>
+![image](https://github.com/voiteckheir/zadanie2/assets/91530837/7e7c4ae4-f18d-4047-bffc-99e1d0963682)
+<br/>
 
 
 <br/><hr/><br/>
 b. opracować łańcuch działań w ramach Github Actions, który pozwoli na zbudowaniu
 obrazów Docker zgodnych z OCI dla dwóch architektur sprzętowych: x86_64 oraz arm64
 (procesor M1/M2).
+```
+
+```
 
 <br/><hr/><br/>
 c. obraz ma zostać poddany testowi pod kątem CVE z wykorzystaniem dowolnego (jednego
 z trzech) narzędzi przedstawionych na końcu instrukcji do laboratorium nr 12. Obraz nie
 może mieć żadnych zagrożeń krytycznych.
+```
 
+```
 <br/><hr/><br/>
 d. w trakcie budowania obrazów należy korzystać z cache w trybie inline
 e. po zbudowaniu, w ramach działań w Github Actions, obraz ma być przesłany do
