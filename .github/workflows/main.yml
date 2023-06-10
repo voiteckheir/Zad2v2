@@ -9,6 +9,8 @@ on:
   pull_request:
     branches: ["**"]
 
+concurrency: production
+
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
@@ -23,7 +25,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: "0"
+
+      - name: Minor version for each merge
+        id: taggerDryRun
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DRY_RUN: true
       # Instalacja środowiska Docker + Buildx
+      - name: echo new tag
+        run: |
+          echo "The next tag version will be: ${{ steps.taggerDryRun.outputs.new_tag }}"
+      - name: echo tag
+        run: |
+          echo "The current tag is: ${{ steps.taggerDryRun.outputs.tag }}"
+      - name: echo part
+        run: |
+          echo "The version increment was: ${{ steps.taggerDryRun.outputs.part }}"
 
       - name: Docker meta
         id: meta
@@ -97,6 +118,13 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:${{ steps.meta.outputs.tags }} #,${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:arm64
           cache-to: type=inline
+
+      - name: Minor version for each merge
+        id: taggerFinal
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
 
   security:
     runs-on: ubuntu-latest
