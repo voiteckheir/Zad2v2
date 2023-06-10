@@ -103,20 +103,23 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Run Snyk to check Docker images for vulnerabilities
-        uses: snyk/actions/docker@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          image: ${{ env.REGISTRY }}/voiteckheir/zadanie2:arm64
-          args: --severity-threshold=critical
-
       - name: snyk node
         uses: snyk/actions/node@master
         id: snyk
         continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      - name: Run Snyk to check Docker images for vulnerabilities
+        uses: snyk/actions/docker@master
+
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+        with:
+          image: ${{ env.REGISTRY }}/voiteckheir/zadanie2${{github.event.push.head.sha || github.event.after}}
+          args: --severity-threshold=critical
 
   changelog:
     runs-on: ubuntu-latest
