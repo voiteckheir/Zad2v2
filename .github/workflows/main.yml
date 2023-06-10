@@ -28,13 +28,28 @@ jobs:
         with:
           fetch-depth: "0"
 
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_TOKEN}}
+
+      - name: Login to GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_SV}}
+          #password: ${{ secrets.GH_TOKEN_NEXT }}
+
       - name: Minor version for each merge
         id: taggerDryRun
         uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
-          DRY_RUN: true
+          WITH_V: false
+          DRY_RUN: false
+
       # Instalacja środowiska Docker + Buildx
       - name: echo new tag
         run: |
@@ -58,20 +73,6 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=sha,prefix=,suffix=,format=short
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{secrets.DOCKERHUB_USERNAME}}
-          password: ${{secrets.DOCKERHUB_TOKEN}}
-
-      - name: Login to GHCR
-        uses: docker/login-action@v1
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GHCR_SV}}
-          #password: ${{ secrets.GH_TOKEN_NEXT }}
 
       # - name: Build
       #   uses: docker/bake-action@v2
