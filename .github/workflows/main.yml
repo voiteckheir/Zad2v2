@@ -129,19 +129,19 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     WITH_V: true
 
-  security:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@master
-      - name: snyk node
-        uses: snyk/actions/node@master
-        id: snyk
-        continue-on-error: true
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --severity-threshold=critical
+  #security:
+  #  runs-on: ubuntu-latest
+  #  needs: build
+  #  steps:
+  #    - uses: actions/checkout@master
+  #    - name: snyk node
+  #      uses: snyk/actions/node@master
+  #      id: snyk
+  #      continue-on-error: true
+  #      env:
+  #        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+  #      with:
+  #        args: --severity-threshold=critical
 
   # changelog:
   #   runs-on: ubuntu-latest
@@ -168,28 +168,28 @@ jobs:
   #         release_name: ${{ steps.changelog.outputs.tag }}
   #         body: ${{ steps.changelog.outputs.clean_changelog }}
   #         draft: false
-  # security:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #   steps:
-  #     - name: Login to GHCR
-  #       uses: docker/login-action@v1
-  #       with:
-  #         registry: ${{ env.REGISTRY }}
-  #         username: ${{ github.repository_owner }}
-  #         password: ${{ secrets.GHCR_SV}}
-  #         #password: ${{ secrets.GH_TOKEN_NEXT }}
+  security:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Login to GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_SV}}
+          #password: ${{ secrets.GH_TOKEN_NEXT }}
 
-  #     - name: snyk node
-  #       uses: snyk/actions/node@master
-  #       id: snyk
-  #       continue-on-error: true
-  #       env:
-  #         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-  #       with:
-  #         args: --severity-threshold=critical
-
-  #         image: ${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:x86_64 #,${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:arm64
+      - name: snyk node
+        uses: snyk/actions/node@master
+        id: snyk
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GHCR_SV}}
+        with:
+          args: --severity-threshold=critical
+          image: ${{ env.REGISTRY }}/${{ github.repository_owner }}/zadanie2:main
 
   # - name: Run Snyk to check Docker images for vulnerabilities
   #   uses: snyk/actions/docker@master
