@@ -123,9 +123,9 @@ jobs:
 
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GHCR_SV }}
         with:
-          image: ${{ env.REGISTRY }}/voiteckheir/zadanie2${{github.event.push.head.sha || github.event.after}}
+          image: ${{ env.REGISTRY }}/voiteckheir/zadanie2${{github.event.pull_request.head.sha || github.event.after}}
           args: --severity-threshold=critical
 
   changelog:
