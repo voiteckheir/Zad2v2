@@ -101,6 +101,8 @@ a. Krótko wyjaśnić wprowadzone modyfikacje,
 
 b. Udowodnić, że kolejny proces uruchomienia łańcucha Github Action spowoduje
 poprawne wygenerowanie numeru kolejnej wersji obrazu
+![image](https://github.com/voiteckheir/zadanie2/assets/91530837/428d9ea0-49bc-4712-99b3-575280fcafa9)
+![image](https://github.com/voiteckheir/zadanie2/assets/91530837/34e58220-df37-4735-8398-9dbf17cf58a7)
 
 <br/><hr/><br/>
 Opracowany łańcuch Github Actions z tagowaniem SemVer ma zostać uruchomiony tak by
